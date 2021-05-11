@@ -18,7 +18,7 @@ subnetName="vmssSubnet"
 
 echo "${green}Create Groups${reset}"
 
-az group delete -g $rgName
+#az group delete -g $rgName
 az group create -g $rgName --location eastus
 
 echo "${green}Create VNets and Subnets${reset}"
@@ -41,7 +41,7 @@ az network vnet create -g $rgName \
 
 az network vnet subnet create --resource-group $rgName --vnet-name $vnetNameW --name $subnetName --address-prefixes 10.51.1.0/24
 
-echo "${green}Get the subnet ID'${reset}"
+echo "${green}Get the subnet IDs'${reset}"
 
 subnetIDE=$(az network vnet subnet list -g $rgName --vnet-name $vnetNameE --query "[?name=='${subnetName}'].id" --output tsv)
 subnetIDW=$(az network vnet subnet list -g $rgName --vnet-name $vnetNameW --query "[?name=='${subnetName}'].id" --output tsv)
@@ -87,7 +87,7 @@ az network lb rule create \
   --frontend-port 80 \
   --protocol tcp
 
-  az network lb rule create \
+az network lb rule create \
   --resource-group $rgName \
   --name myLoadBalancerRuleWeb \
   --lb-name "${vmssnameW}LB" \
@@ -98,6 +98,7 @@ az network lb rule create \
   --protocol tcp \
 
 echo "${green}Assigning DNS names to public IPs${reset}"
+
 az network public-ip update -g $rgName -n vmsseusLBPublicIP --dns-name "${prefix}fdeus" 
 az network public-ip update -g $rgName -n vmsswusLBPublicIP --dns-name "${prefix}fdwus"
 

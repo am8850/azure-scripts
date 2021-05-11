@@ -1,4 +1,4 @@
-# azure-scripts
+# Azure CLI Scripts
 
 A collection of Azure CLI scripts
 

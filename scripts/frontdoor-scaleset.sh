@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Text colors
 red=`tput setaf 1`
 green=`tput setaf 2`
